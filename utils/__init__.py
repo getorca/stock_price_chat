@@ -18,6 +18,7 @@ def get_yfinance_data(params, context_date):
             end_date = date
         elif date > context_date:
             logging.error('Date in the future')
+            return None, None, None
             # raise Exception('OOPS')
         
         else:
@@ -35,10 +36,12 @@ def get_yfinance_data(params, context_date):
             # error_message = shared._ERRORS[ticker]  # ToDO: return error message
             return (hist.to_csv(), date, last_close)
         except:
-            error_message = shared._ERRORS[ticker]
-            logging.error(error_message)
+            # error_message = shared._ERRORS[ticker]
+            # logging.error(error_message)
             logging.error('no data from yfinance')
+            return None, None, None
             # raise Exception('OOPS')
     else:
         logging.error('no date parsed')
+        return None, None, None
         # raise Exception('OOPS')

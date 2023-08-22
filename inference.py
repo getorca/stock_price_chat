@@ -83,13 +83,15 @@ class Inference:
         chat_history[-1]['action'] = self.generate(c_input)
 
         # step 3 - do the yahoo finance query, and add the response to the input as `<|KNOWLEDGE|>`
-        chat_history[-1]['knowledge'] = get_yfinance_data(chat_history[-1]['action'], context_date)
-
+        chat_history[-1]['knowledge'], chat_history[-1]['parsed_date'], chat_history[-1]['last_close'] = get_yfinance_data(chat_history[-1]['action'], context_date)
+        # knowledge, parsed_date, last_close 
+        
         # step 4 - generate everything and return the response
         t_input = self.format_input(chat_history[-1])
-
-        chat_history[-1]['response'] = self.generate(t_input)
-
+        if chat_history[-1]['knowledge']:
+            chat_history[-1]['response'] = self.generate(t_input)
+        else:
+            chat_history[-1]['response'] = 'I am sorry I could not find the stock price for that date.'
         return chat_history
 
 
