@@ -1,8 +1,17 @@
 # Stock Price Chat
 
+[Model](https://huggingface.co/winddude/stock_price_chat) | [Dataset](https://huggingface.co/datasets/winddude/stock_price_chat_ds) | [Blog](https://nootka.ai)
+
+
 Stock price chat is an experiment in intent driven instruction and RaG(Retrevial augmented generation) for answer plain text querries for stock prices. This model only handles getting a single stock price from yfinance and replies in plain english. There are a few finance specific models, like FinGPT and BloombergGPT but to our knowledge they primarly focus static data.
 
 Stock Price Chat is designed to extract live and historic information. The model primarily demonstrates a level of NER and translation, taking plain english stock names and converting them to tickers. And NER extracting the plain text date. The model also demonstrates the ability to transform plain text in uniform and structured json to send to an API, without need to explicity describe the api in the system context. Lasty the model demonstrates the ability to extract appropriate information based on a user input from a CSV returned by an API.
+
+## Model
+
+The base model is Llama 2 7B.
+
+The Lora adapter and tokenizer are available here: <https://huggingface.co/winddude/stock_price_chat/blob/main/README.md>
 
 ## Training
 
