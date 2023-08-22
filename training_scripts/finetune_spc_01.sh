@@ -1,0 +1,11 @@
+python train.py \
+    --model_name_or_path ./stock_price_chat_Llama-2-7b-hf \
+    --output_dir ./output/stock_price_chat_01 \
+    --dataset ./data_out/stock_prices_tokenized.hf \
+    --lora_r 4 \
+    --lora_alpha 8 \
+    --lora_modules all \
+    --lr_scheduler_type constant \
+    --per_device_train_batch_size 4 \
+    --gradient_accumulation_steps 1 \ 
+    --learning_rate 0.0002 \
