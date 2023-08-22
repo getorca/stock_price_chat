@@ -8,15 +8,29 @@ Stock Price Chat is designed to extract live and historic information. The model
 
 Stock price chat is a fine tuned LORA on Llama 2 7B. It was trained for 3 epocs with NooForge(https://github.com/Nootka-io/nooForge) (yet to be released), which builds on Huggingface Transformers and PEFT. 
 
-Bash script for NooForge: <https://github.com/getorca/stock_price_chat/blob/main/training_scripts/finetune_spc_01.sh>
+Config file for packing and tokenization with NooForge: <>
+
+Bash script for training with NooForge: <https://github.com/getorca/stock_price_chat/blob/main/training_scripts/finetune_spc_01.sh>
 
 ### Training Data
 
+The training data consits of ~12000 rows of prompt, action, knowledge and response sets. in the following format:
+
+```json
+{"prompt":"What was Air Products and Chemicals worth ?","action":"{\"action\": \"qStock\", \"params\": {\"symbol\": \"APD\", \"date\": \"1 year ago\"}}","knowledge":"Date,Open,High,Low,Close,Volume,Dividends,Stock Splits\n2022-07-12 00:00:00-04:00,234.68,235.17,229.85,231.93,2143400,0.0,0.0\n2022-07-13 00:00:00-04:00,228.33,230.23,226.41,227.99,891700,0.0,0.0\n2022-07-14 00:00:00-04:00,225.0,225.34,218.88,221.98,2059600,0.0,0.0\n","response":"The stock price of Air Products and Chemicals, Inc(APD) is 221.98 on Friday, July 15, 2022.","meta_data":{"context_date":"2023-07-15T00:00:00","date_string":"1 year ago","parsed_date":"2022-07-15T00:00:00","stock":{"symbol":"APD","name":"Air Products and Chemicals, Inc","short_name":"Air Products and Chemicals","currency":"USD"},"error":false}}
+
+```
+
 The training data is available here:
 - <https://github.com/getorca/stock_price_chat/blob/main/data_out/cleaned_eval_stock_prices.jsonl>
-- huggingface: <>
-- packed and tokenized for training: <>
+- huggingface: <https://huggingface.co/datasets/winddude/stock_price_chat_ds/blob/main/stock_prices_cleaned.jsonl>
+- packed and tokenized for training: <https://huggingface.co/datasets/winddude/stock_price_chat_ds/tree/main/stock_prices_tokenized.hf> in arrow format
 
+30 Prompt templates combine with 16 date formats to create a wide variety of prompt inputs. Combined with 808 US based larged cap stocks. The list of large cap stocks is pulled from FinanceDatabase(https://github.com/JerBouma/FinanceDatabase). Random dates are chosen for each sample between 2020-10-01 and 2023-08-15. A `context_dates` is also set between this two dates and used to "free dates" like: "last week", "yesterday", etc.
+
+yFinance is used to return knowedge, and augment into the training data.
+
+To recreate the non-tokenized training data use <https://github.com/getorca/stock_price_chat/blob/main/stock_prices.ipynb>.
 
 ## Inference
 
