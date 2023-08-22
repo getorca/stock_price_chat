@@ -68,7 +68,9 @@ Evaluation was run on ~1100 examples <https://github.com/getorca/stock_price_cha
 
 Accuracy was chose to calculate the effectivness of the model, since we're more concerned about absolute values including the extraction and tanslation of the stock to a ticker symbol, the extracted date string, and the final price extracted from the `knowledge` context. Accuracy for the 3 metrics was calulated with scikit-learn accuracy with the following forumula:
 
-$$\texttt{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)$$
+```math
+\texttt{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)
+```
 
 Rouge score was calculated on the response, however it's not overly useful, until comparing to other variants. 
 
