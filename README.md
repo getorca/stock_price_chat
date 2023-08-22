@@ -11,7 +11,7 @@ Stock Price Chat is designed to extract live and historic information. The model
 
 The base model is Llama 2 7B.
 
-The Lora adapter and tokenizer are available here: <https://huggingface.co/winddude/stock_price_chat/blob/main/README.md>
+The Lora adapter and tokenizer are available here: <https://huggingface.co/winddude/stock_price_chat/blob/main/README.md>. Be sure to copy the 3 tokenizer files over the base Llama tokenizer, as it has special tokens added needed for the intent/action loop and prompting.
 
 ## Training
 
@@ -56,6 +56,9 @@ chat_history = [{
 }]
 response = inference.do_chat(chat_history, context_date=context_date)
 ```
+
+You will need to change `base_model_path` and `peft_model_path` to reflect the location on your system.
+
 note: although `chat_history` is a list only 1 should be sent at a time
 
 The response is returned with the `chat_history` with the `action`, `knowledge`, and `response` objects included. Only the response should be disabled to the user, but `action` and `knowledge` should be available to the user for transparency.
