@@ -67,9 +67,14 @@ The above template is created when `inference.do_chat()` is called.
 
 ## Evaluation
 
-Evaluation was run on ~1100 examples <https://github.com/getorca/stock_price_chat/blob/main/data_out/eval_data.json>. The eval script is available here: <https://github.com/getorca/stock_price_chat/blob/main/eval.py>.
+Evaluation was run on ~1100 examples, seperate from the training data.
 
-Accuracy was chose to calculate the effectivness of the model, since we're more concerned about absolute values including the extraction and tanslation of the stock to a ticker symbol, the extracted date string, and the final price extracted from the `knowledge` context. Accuracy for the 3 metrics was calulated with scikit-learn accuracy with the following forumula:
+Evaluation data: <https://github.com/getorca/stock_price_chat/blob/main/data_out/cleaned_eval_stock_prices.jsonl>.
+Evaluated sample response: <https://github.com/getorca/stock_price_chat/blob/main/data_out/eval_data.json>. 
+
+The eval script is available here: <https://github.com/getorca/stock_price_chat/blob/main/eval.py>.
+
+Accuracy was chosen as the primary metric for evaluating the model. Accuracy is a good metric since we're more concerned about absolute values, very similar to a labeling task including the extraction and tanslation of the stock to a ticker symbol, the extracted date string, and the final price extracted from the `knowledge` context. Accuracy for the 3 metrics was calulated with scikit-learn accuracy with the following forumula:
 
 ```math
 \texttt{accuracy}(y, \hat{y}) = \frac{1}{n_\text{samples}} \sum_{i=0}^{n_\text{samples}-1} 1(\hat{y}_i = y_i)
