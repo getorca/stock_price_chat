@@ -111,3 +111,5 @@ Further eval could be done to find out what style of dates are failing, as well 
 4) PriceParser(https://github.com/scrapinghub/price-parser) used for converting human dates to python datatime objects fails to parse some formats.
 
 5) It is uncertain is the system message adds any value in an intent/action model, since the intent can drive as the rompt for what the model should perform. Although a system message was included here, our theory is system prompts will add little to no value on an intent/action model, especially with multiple intents and actions. Further experiments need to be done.
+
+6) The model currently only supports single turn generation. This limits the ability to continue discussions about data in other ways, or even introduce other data. Future models should support multi-turn prompting, and even be able to add additional actions and knowledge. 
