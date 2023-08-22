@@ -8,7 +8,7 @@ Stock Price Chat is designed to extract live and historic information. The model
 
 Stock price chat is a fine tuned LORA on Llama 2 7B. It was trained for 3 epocs with NooForge(https://github.com/Nootka-io/nooForge) (yet to be released), which builds on Huggingface Transformers and PEFT. 
 
-Config file for packing and tokenization with NooForge: <>
+Config file for packing and tokenization with NooForge: <https://github.com/getorca/stock_price_chat/blob/main/training_scripts/stc_config.yml>
 
 Bash script for training with NooForge: <https://github.com/getorca/stock_price_chat/blob/main/training_scripts/finetune_spc_01.sh>
 
