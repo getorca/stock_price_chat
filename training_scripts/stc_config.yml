@@ -1,0 +1,38 @@
+%YAML 1.1
+---
+
+Name: Stock_Price_Chat
+
+model: meta-llama/Llama-2-7b-hf
+tokenizer:
+  additional_special_tokens: 
+    - <|PAD|>
+    - <|SYSTEM|>
+    - <|END_SYSTEM|>
+    - <|INPUT|>
+    - <|END_INPUT|>
+    - <|ACTION|>
+    - <|END_ACTION|>
+    - <|KNOWLEDGE|>
+    - <|END_KNOWLEDGE|>
+    - <|RESPONSE|>
+    - <|END_RESPONSE|>
+  pad_token: <|PAD|>
+  name: ./data_out/llama2_stock_prices_tokenizer
+max_length: 2048
+tokenized_ds: ./data_out/stock_prices_tokenized.hf
+
+Templates:
+  KNOWLEDGE_ACTION:
+    file: knowledge_action.txt
+    template_args:
+      default_system_msg: You are a bot that provides stock prices. From a user input first create an action with the ticker and date in a jsons string. If you are sent an action and knowledge create the response with the stock price from the provided knowledge for the date the user asks.
+
+Datasets:
+  - file: /home/lawrence/Projects/stock_price_chat/data_out/stock_prices_cleaned.jsonl
+    template: KNOWLEDGE_ACTION
+    template_mapping: 
+      input: prompt
+      action: action
+      response: response
+      knowledge: knowledge
