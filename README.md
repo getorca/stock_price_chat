@@ -108,4 +108,6 @@ Further eval could be done to find out what style of dates are failing, as well 
 
 3) Enhancing the model for information retrevial on further funmental stock tasks, including; returning volume, market cap, etc, can further enchance the usefulness of the model. 
 
-4) PriceParser(https://github.com/scrapinghub/price-parser) used for converting human dates to python datatime objects fails to parse some formats. 
+4) PriceParser(https://github.com/scrapinghub/price-parser) used for converting human dates to python datatime objects fails to parse some formats.
+
+5) It is uncertain is the system message adds any value in an intent/action model, since the intent can drive as the rompt for what the model should perform. Although a system message was included here, our theory is system prompts will add little to no value on an intent/action model, especially with multiple intents and actions. Further experiments need to be done.
