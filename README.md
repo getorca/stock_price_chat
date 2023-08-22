@@ -17,16 +17,12 @@ Bash script for NooForge: <>
 
 ## Inference
 
-```flow
-st=>start: User Input
-op=>opperation: Price Chat Model
-fu>function: yFinance API 
-cond=>condition: Action?
-e=>end: User Response
-
-st->op->cond
-cond(yes) -> fu -> op
-cond(no)->e
+```mermaid
+graph TD;
+in[User Input] --> pcm[Price Chat Model]
+    pcm --> con{Action?}
+    con --> |Yes| yF[yFinance Function] --> pcm
+    con --> |No| r[Response]
 ```
 
 ## Evaluation
