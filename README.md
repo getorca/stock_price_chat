@@ -8,7 +8,7 @@ Stock Price Chat is designed to extract live and historic information. The model
 
 Stock price chat is a fine tuned LORA on Llama 2 7B. It was trained for 3 epocs with NooForge(https://github.com/Nootka-io/nooForge) (yet to be released), which builds on Huggingface Transformers and PEFT. 
 
-Bash script for NooForge: <>
+Bash script for NooForge: <https://github.com/getorca/stock_price_chat/blob/main/training_scripts/finetune_spc_01.sh>
 
 ### Training Data
 
@@ -101,6 +101,6 @@ Further eval could be done to find out what style of dates are failing, as well 
 
 2) The model is currently limited to a single day's price and a single ticker symbol. The usefulness of the model should be extended by supplying data for multiple days, multiple tickers, and even rendering interactive charts. LLMs fundementally struggle with math so it would be worth seriously considering if the model should be relied on to compair differences in prices, between datas and tickers, or if it should be further trained to with "math actions" to use a caluclator.
 
-3) Enhancing the model for information retrevial on further funmental stock taks, like returning volume, market cap, etc, can further enchance the usefulness of the model. 
+3) Enhancing the model for information retrevial on further funmental stock tasks, including; returning volume, market cap, etc, can further enchance the usefulness of the model. 
 
 4) PriceParser(https://github.com/scrapinghub/price-parser) used for converting human dates to python datatime objects fails to parse some formats. 
