@@ -1,8 +1,8 @@
 # Stock Price Chat
 
-Stock price chat is an experiment in intent driven instruction and RaG(Retrevial augmented generation) for answer plain text querries for stock prices. This model only handles getting a single stock price from yfinance and replies in plain english.
+Stock price chat is an experiment in intent driven instruction and RaG(Retrevial augmented generation) for answer plain text querries for stock prices. This model only handles getting a single stock price from yfinance and replies in plain english. There are a few finance specific models, like FinGPT and BloombergGPT but to our knowledge they primarly focus static data.
 
-The model primarily demonstrates a level of NER and translation, taking plain english stock names and converting them to tickers. And NER extracting the plain text date. The model also demonstrates the ability to transform plain text in uniform and structured json to send to an API, without need to explicity describe the api in the system context. Lasty the model demonstrates the ability to extract appropriate information based on a user input from a CSV returned by an API.
+Stock Price Chat is designed to extract live and historic information. The model primarily demonstrates a level of NER and translation, taking plain english stock names and converting them to tickers. And NER extracting the plain text date. The model also demonstrates the ability to transform plain text in uniform and structured json to send to an API, without need to explicity describe the api in the system context. Lasty the model demonstrates the ability to extract appropriate information based on a user input from a CSV returned by an API.
 
 ## Training
 
@@ -87,3 +87,17 @@ Rouge score was calculated on the response, however it's not overly useful, unti
     }
 }
 ```
+
+We can expect to `price_accuracy` to always be wrong if either or both of `symbol_accuracy` or `date_string_accuracy` are wrong, and as such as these two metrics improve we can expect price accuracy to improve.
+
+Further eval could be done to find out what style of dates are failing, as well as what style of symbols. Further limitations are enchancement are discussed in the section "Limitations and Further Improvements" below.
+
+## Limitations and Further Improvements
+
+1) FinanceDatabase(https://github.com/JerBouma/FinanceDatabase) was used for creating the plain text names and ticker symbols. An adhock look at the database shows there are maybe some errors in the data, as well as missing names like facebook for meta. Further improvements will likely result from a better dataset for creating ticker/name pairs. This can also further enhance a more natural language understanding of stock names. An aditional way to introduce a better natural language understanding is to indroduce more training data that discuss stocks in natural language. 
+
+2) The model is currently limited to a single day's price and a single ticker symbol. The usefulness of the model should be extended by supplying data for multiple days, multiple tickers, and even rendering interactive charts. LLMs fundementally struggle with math so it would be worth seriously considering if the model should be relied on to compair differences in prices, between datas and tickers, or if it should be further trained to with "math actions" to use a caluclator.
+
+3) Enhancing the model for information retrevial on further funmental stock taks, like returning volume, market cap, etc, can further enchance the usefulness of the model. 
+
+4) PriceParser(https://github.com/scrapinghub/price-parser) used for converting human dates to python datatime objects fails to parse some formats. 
